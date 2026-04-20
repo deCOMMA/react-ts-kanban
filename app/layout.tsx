@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import StyledComponentsRegistry from "@/lib/styled-components-registry";
+import StyledComponentsRegistry from "@/src/shared/lib/styled-components-registry";
 import { Inter } from "next/font/google";
-import { GlobalStyles } from "@/app/styles/GlobalStyles";
+import { GlobalStyles } from "@/src/app/styles/GlobalStyles";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
