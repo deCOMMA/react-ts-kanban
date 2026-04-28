@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import StyledComponentsRegistry from "@/src/shared/lib/styled-components-registry";
 import { Inter } from "next/font/google";
-import { GlobalStyles } from "@/src/app/styles/GlobalStyles";
+import { Providers } from "@/src/app/providers/Providers";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -9,21 +8,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Диплом в работе",
+  title: "Kanban App",
+  description: "Kanban task management app",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ru" className={inter.className}>
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStyles />
-          {children}
-        </StyledComponentsRegistry>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
