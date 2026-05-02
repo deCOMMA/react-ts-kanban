@@ -10,4 +10,4 @@ export type {
   UpdateDto,
   Ordered,
   WithLoading,
-} from "./utility/utilityTypes";
+} from "./utility/utility";
