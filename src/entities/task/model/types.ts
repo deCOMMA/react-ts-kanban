@@ -33,3 +33,8 @@ export interface Task {
 
 export type CreateTaskDto = CreateDto<Task>;
 export type UpdateTaskDto = UpdateDto<Task>;
+
+export interface MoveTaskDto {
+  columnId: string;
+  order: number;
+}

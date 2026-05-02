@@ -1,10 +1,14 @@
+import { ReactNode } from "react";
+
 export type Nullable<T> = T | null;
 
 export type Maybe<T> = T | undefined;
 
 export type Optional<T> = T | null | undefined;
 
-export type WithChildren<T> = T & { children: T[] };
+export type WithChildren<T> = T & {
+    children: ReactNode;
+};
 
 /** Делает вложенный объект полностью Partial (рекурсивно) */
 export type DeepPartial<T> = {

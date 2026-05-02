@@ -15,5 +15,4 @@ export interface Comment {
 }
 
 export type CreateCommentDto = CreateDto<Comment>;
-
 export type UpdateCommentDto = RequireFields<UpdateDto<Comment>, "text">;

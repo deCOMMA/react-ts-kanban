@@ -13,10 +13,10 @@ export interface Column {
 }
 
 export const DEFAULT_COLUMNS: Pick<Column, "title" | "order" | "color">[] = [
-  { title: "Бэклог", order: 0, color: "#6B7280" },
-  { title: "В работе", order: 1, color: "#3B82F6" },
-  { title: "Ревью", order: 2, color: "#F59E0B" },
-  { title: "Готово", order: 3, color: "#10B981" },
+  { title: "Бэклог", order: 0, color: "rgb(107 114 128)" },
+  { title: "В работе", order: 1, color: "rgb(59 130 246)" },
+  { title: "Ревью", order: 2, color: "rgb(245 158 11)" },
+  { title: "Готово", order: 3, color: "rgb(16 185 129)" },
 ];
 
 export type CreateColumnDto = CreateDto<Column>;
