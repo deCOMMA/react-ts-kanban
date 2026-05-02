@@ -13,5 +13,5 @@ export function Skeleton({
     height = "16px",
     radius = "8px",
 }: SkeletonProps) {
-    return <StyledSkeleton width={width} height={height} radius={radius} />;
+    return <StyledSkeleton $width={width} $height={height} $radius={radius} />;
 }

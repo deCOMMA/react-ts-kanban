@@ -11,13 +11,13 @@ const shimmer = keyframes`
 `;
 
 export const StyledSkeleton = styled.div<{
-    width: string;
-    height: string;
-    radius: string;
+    $width: string;
+    $height: string;
+    $radius: string;
 }>`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  border-radius: ${({ radius }) => radius};
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
+  border-radius: ${({ $radius }) => $radius};
 
   background: linear-gradient(
     90deg,

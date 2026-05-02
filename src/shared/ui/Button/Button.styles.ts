@@ -86,7 +86,7 @@ export const StyledButton = styled.button<{
   border-radius: ${({ theme }) => theme.radius.md};
   font-weight: 500;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 
   border: none;
 

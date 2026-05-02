@@ -26,7 +26,7 @@ export const StyledInput = styled.input<{ $hasError: boolean }>`
 
   font-size: 14px;
   outline: none;
-  transition: 0.2s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textMuted};
