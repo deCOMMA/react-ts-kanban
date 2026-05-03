@@ -1,0 +1,15 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "name": "Dmitriy",
+            "email": "test@test.com",
+            "password": "123456"
+        }
+    ],
+    "projects": [],
+    "boards": [],
+    "columns": [],
+    "tasks": [],
+    "comments": []
+}

@@ -1,5 +1,3 @@
-// src/app/styles/theme.ts
-
 export const theme = {
     colors: {
         primary: "rgb(37 99 235)",

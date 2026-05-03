@@ -1,0 +1,1 @@
+export { LoginPage as default } from "@/src/views/login";

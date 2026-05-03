@@ -36,19 +36,19 @@ export const variantStyles = {
   `,
 
     outlined: css`
-    background: transparent;
-    color: ${({ theme }) => theme.colors.primary};
-    border: 1px solid ${({ theme }) => theme.colors.border};
+        background: transparent;
+        color: ${({ theme }) => theme.colors.primary};
+        border: 1px solid ${({ theme }) => theme.colors.border};
 
-    &:hover:not(:disabled) {
-      background: ${({ theme }) => theme.colors.secondaryActive};
-      border-color: ${({ theme }) => theme.colors.primary};
-    }
+        &:hover:not(:disabled) {
+            background: rgb(37 99 235 / 0.08);
+            border-color: ${({ theme }) => theme.colors.primary};
+        }
 
-    &:active:not(:disabled) {
-      background: ${({ theme }) => theme.colors.primaryActive};
-    }
-  `,
+        &:active:not(:disabled) {
+            background: rgb(37 99 235 / 0.16);
+        }
+`,
 };
 
 export const sizeStyles = {

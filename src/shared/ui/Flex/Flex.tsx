@@ -1,5 +1,3 @@
-// src/shared/ui/Flex/Flex.tsx
-
 "use client";
 
 import type { HTMLAttributes } from "react";

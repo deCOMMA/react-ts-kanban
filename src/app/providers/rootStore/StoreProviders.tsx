@@ -1,5 +1,3 @@
-// src/app/providers/StoreProvider.tsx
-
 "use client";
 
 import { createContext, useContext } from "react";
