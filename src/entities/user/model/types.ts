@@ -1,12 +1,13 @@
-import type { CreateDto, UpdateDto } from "@/src/shared/types/index";
+import type { CreateDto, Nullable, UpdateDto } from "@/src/shared/types/index";
 
 export interface User {
     id: string;
     email: string;
     fullName: string;
-    avatarUrl?: string;
+    avatarUrl?: Nullable<string>;
     createdAt: string;
     updatedAt: string;
+    password: string;
 }
 
 export type UserPreview = Pick<User, "id" | "fullName" | "avatarUrl">;

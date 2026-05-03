@@ -1,10 +1,31 @@
 "use client";
 
+import { useStore } from "@/src/app/providers/rootStore/StoreProviders";
 import * as Styles from "./LoginPage.styles";
 import { Button } from "@/src/shared/ui/Button";
 import { Input } from "@/src/shared/ui/Input";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function LoginPage() {
+
+    const { authStore } = useStore();
+    const router = useRouter();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("123")
+
+        const success = await authStore.login(email, password);
+
+        if (success) {
+            router.push("/");
+        }
+    };
+
     return (
         <Styles.Page>
             <Styles.FormCard>
@@ -15,20 +36,25 @@ export function LoginPage() {
                     </Styles.Subtitle>
                 </Styles.Header>
 
-                <Styles.Form>
+                <Styles.Form onSubmit={handleSubmit}>
                     <Input
                         label="Email"
-                        type="email"
-                        placeholder="example@mail.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
                     <Input
                         label="Пароль"
                         type="password"
-                        placeholder="Введите пароль"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <Button fullWidth>Войти</Button>
+                    <Button fullWidth type="submit">
+                        Войти
+                    </Button>
+
+                    {authStore.error && <div>{authStore.error}</div>}
                 </Styles.Form>
 
                 <Styles.Footer>

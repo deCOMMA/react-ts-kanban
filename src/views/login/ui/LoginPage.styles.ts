@@ -10,6 +10,11 @@ export const Page = styled.main`
   background: ${({ theme }) => theme.colors.background};
 `;
 
+export const ErrorText = styled.p`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.danger};
+`;
+
 export const FormCard = styled.section`
   width: 100%;
   max-width: 420px;

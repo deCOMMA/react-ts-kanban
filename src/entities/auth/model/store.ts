@@ -1,97 +1,98 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import type { WithLoading, Nullable } from "@/src/shared/types";
-import type { AuthCredentials, RegisterCredentials, AuthResponse } from "./types";
-import { login, register, logout } from "./authService";
+import type { User } from "@/src/entities/user/model/types";
+import {
+    loginUser,
+    registerUser,
+    checkUserByEmail,
+} from "../model/authService";
 
 export class AuthStore {
-    token: Nullable<string> = null;
-    userId: Nullable<string> = null;
-
-    state: WithLoading<AuthResponse> = {
-        data: null,
-        isLoading: false,
-        error: null,
-    };
+    user: User | null = null;
+    isLoading = false;
+    error: string | null = null;
 
     constructor() {
         makeAutoObservable(this);
-        if (typeof window !== "undefined") {
-            this.token = localStorage.getItem("token");
-            this.userId = localStorage.getItem("userId");
+
+        // восстановление из localStorage
+        const stored = localStorage.getItem("user");
+        if (stored) {
+            this.user = JSON.parse(stored);
         }
     }
 
-    get isAuthenticated() {
-        return !!this.token;
-    }
-
-    get isLoading() {
-        return this.state.isLoading;
-    }
-
-    get error() {
-        return this.state.error;
-    }
-
-    login = async (dto: AuthCredentials) => {
-        this.state.isLoading = true;
-        this.state.error = null;
+    async register(fullName: string, email: string, password: string) {
+        this.isLoading = true;
+        this.error = null;
 
         try {
-            const { data } = await login(dto);
-            runInAction(() => {
-                this.token = data.token;
-                this.userId = data.userId;
-                this.state.data = data;
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("userId", data.userId);
+            const exists = await checkUserByEmail(email);
+
+            if (exists) {
+                throw new Error("Пользователь с такой почтой уже существует");
+            }
+
+            const now = new Date().toISOString();
+
+            await registerUser({
+                fullName: fullName.trim(),
+                email: email.trim().toLowerCase(),
+                password,
+                avatarUrl: null,
+                createdAt: now,
+                updatedAt: now,
             });
-        } catch {
+
+            return true;
+        } catch (e: unknown) {
             runInAction(() => {
-                this.state.error = "Неверный логин или пароль";
+                this.error = e instanceof Error ? e.message : "Ошибка регистрации";
             });
+
+            return false;
         } finally {
             runInAction(() => {
-                this.state.isLoading = false;
+                this.isLoading = false;
             });
         }
-    };
+    }
 
-    register = async (dto: RegisterCredentials) => {
-        this.state.isLoading = true;
-        this.state.error = null;
+    async login(email: string, password: string) {
+        this.isLoading = true;
+        this.error = null;
 
         try {
-            const { data } = await register(dto);
-            runInAction(() => {
-                this.token = data.token;
-                this.userId = data.userId;
-                this.state.data = data;
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("userId", data.userId);
-            });
-        } catch {
-            runInAction(() => {
-                this.state.error = "Ошибка при регистрации";
-            });
-        } finally {
-            runInAction(() => {
-                this.state.isLoading = false;
-            });
-        }
-    };
+            const user = await loginUser(email, password);
+            console.log(user)
+            if (!user) {
+                throw new Error("Неверный email или пароль");
+            }
 
-    logout = async () => {
-        try {
-            await logout();
+            runInAction(() => {
+                this.user = user;
+                console.log("321")
+                localStorage.setItem("user", JSON.stringify(user));
+            });
+
+            return true;
+        } catch (e: any) {
+            runInAction(() => {
+                this.error = e.message;
+            });
+            return false;
         } finally {
             runInAction(() => {
-                this.token = null;
-                this.userId = null;
-                this.state.data = null;
-                localStorage.removeItem("token");
-                localStorage.removeItem("userId");
+                this.isLoading = false;
             });
         }
-    };
+    }
+
+    logout() {
+        this.user = null;
+        localStorage.removeItem("user");
+    }
+
+    get isAuth() {
+        return Boolean(this.user);
+    }
 }

@@ -1,15 +1,28 @@
 {
-    "users": [
-        {
-            "id": "1",
-            "name": "Dmitriy",
-            "email": "test@test.com",
-            "password": "123456"
-        }
-    ],
-    "projects": [],
-    "boards": [],
-    "columns": [],
-    "tasks": [],
-    "comments": []
+  "users": [
+    {
+      "id": "1",
+      "fullName": "Dmitriy",
+      "email": "serbinovskijdima@gmail.com",
+      "password": "123456",
+      "avatarUrl": null,
+      "createdAt": "2026-05-04T00:00:00.000Z",
+      "updatedAt": "2026-05-04T00:00:00.000Z"
+    },
+    {
+      "fullName": "decomma",
+      "email": "123@123.123",
+      "password": "123456",
+      "avatarUrl": null,
+      "createdAt": "2026-05-03T23:24:20.970Z",
+      "updatedAt": "2026-05-03T23:24:20.970Z",
+      "id": "qQT9DRXSJR0"
+    }
+  ],
+  "projects": [],
+  "boards": [],
+  "columns": [],
+  "tasks": [],
+  "comments": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
