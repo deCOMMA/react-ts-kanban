@@ -7,10 +7,10 @@ import { PlusIcon } from "lucide-react";
 import * as Styles from "./ProjectsPage.styles";
 import { Button } from "@/src/shared/ui/Button";
 import { useStore } from "@/src/app/providers/rootStore/StoreProviders";
+import { useRouter } from "next/navigation";
 
 export const ProjectsPage = observer(function ProjectsPage() {
     const { authStore, projectStore } = useStore();
-
     useEffect(() => {
         if (!authStore.user?.id) {
             return;
@@ -19,18 +19,10 @@ export const ProjectsPage = observer(function ProjectsPage() {
         projectStore.fetchProjects(authStore.user.id);
     }, [authStore.user?.id, projectStore]);
 
-    const handleCreateProject = async () => {
-        if (!authStore.user?.id) {
-            return;
-        }
+    const router = useRouter();
 
-        const title = window.prompt("Введите название проекта");
-
-        if (!title?.trim()) {
-            return;
-        }
-
-        await projectStore.createProject(authStore.user, title);
+    const handleCreateProject = () => {
+        router.push("/project/new");
     };
 
     return (
@@ -60,7 +52,7 @@ export const ProjectsPage = observer(function ProjectsPage() {
                         {projectStore.projects.map((project) => (
                             <Styles.ProjectCard
                                 key={project.id}
-                                href={`/projects/${project.id}`}
+                                href={`/project/${project.id}/kanban`}
                             >
                                 <Styles.ProjectTitle>{project.title}</Styles.ProjectTitle>
 

@@ -37,7 +37,11 @@ export class ProjectStore {
         }
     }
 
-    async createProject(user: User, title: string) {
+    async createProject(
+        user: User,
+        title: string,
+        description: string
+    ): Promise<Project | null> {
         this.isLoading = true;
         this.error = null;
 
@@ -52,7 +56,7 @@ export class ProjectStore {
 
             const project = await createProject({
                 title: title.trim(),
-                description: "",
+                description: description.trim(),
                 key: projectKey || "PROJ",
                 owner: user.id,
                 members: [
@@ -69,14 +73,14 @@ export class ProjectStore {
                 this.projects.push(project);
             });
 
-            return true;
+            return project;
         } catch (e: unknown) {
             runInAction(() => {
                 this.error =
                     e instanceof Error ? e.message : "Ошибка создания проекта";
             });
 
-            return false;
+            return null;
         } finally {
             runInAction(() => {
                 this.isLoading = false;
