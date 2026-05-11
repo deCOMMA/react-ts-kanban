@@ -17,12 +17,12 @@ export function LoginPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("123")
 
         const success = await authStore.login(email, password);
+        console.log(success)
 
         if (success) {
-            router.push("/");
+            router.push("/project");
         }
     };
 

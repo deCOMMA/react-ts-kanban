@@ -10,14 +10,28 @@ export class AuthStore {
     user: User | null = null;
     isLoading = false;
     error: string | null = null;
+    isInitialized = false;
 
     constructor() {
         makeAutoObservable(this);
+    }
 
-        // восстановление из localStorage
-        const stored = localStorage.getItem("user");
-        if (stored) {
-            this.user = JSON.parse(stored);
+    initAuth() {
+        if (typeof window === "undefined") {
+            return;
+        }
+
+        try {
+            const stored = localStorage.getItem("user");
+
+            if (stored) {
+                this.user = JSON.parse(stored);
+            }
+        } catch {
+            this.user = null;
+            localStorage.removeItem("user");
+        } finally {
+            this.isInitialized = true;
         }
     }
 
@@ -63,22 +77,25 @@ export class AuthStore {
 
         try {
             const user = await loginUser(email, password);
-            console.log(user)
+
             if (!user) {
                 throw new Error("Неверный email или пароль");
             }
 
             runInAction(() => {
                 this.user = user;
-                console.log("321")
-                localStorage.setItem("user", JSON.stringify(user));
+
+                if (typeof window !== "undefined") {
+                    localStorage.setItem("user", JSON.stringify(user));
+                }
             });
 
             return true;
-        } catch (e: any) {
+        } catch (e: unknown) {
             runInAction(() => {
-                this.error = e.message;
+                this.error = e instanceof Error ? e.message : "Ошибка авторизации";
             });
+
             return false;
         } finally {
             runInAction(() => {
@@ -89,7 +106,11 @@ export class AuthStore {
 
     logout() {
         this.user = null;
-        localStorage.removeItem("user");
+        this.error = null;
+
+        if (typeof window !== "undefined") {
+            localStorage.removeItem("user");
+        }
     }
 
     get isAuth() {

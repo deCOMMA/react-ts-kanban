@@ -1,11 +1,15 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { rootStore, RootStore } from "./rootStore";
 
 const StoreContext = createContext<RootStore | null>(null);
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
+    useEffect(() => {
+        rootStore.authStore.initAuth();
+    }, []);
+
     return (
         <StoreContext.Provider value={rootStore}>
             {children}

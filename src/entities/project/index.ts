@@ -1,2 +1,2 @@
-export type { Project, CreateProjectDto, UpdateProjectDto } from "./model/types";
 export { ProjectStore } from "./model/store";
+export type { Project } from "./model/types";

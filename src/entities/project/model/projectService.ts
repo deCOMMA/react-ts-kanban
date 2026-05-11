@@ -1,17 +1,19 @@
-import { $api } from "@/src/shared/api/axios";
-import type { Project, CreateProjectDto, UpdateProjectDto } from "./types";
+import { request } from "@/src/shared/api/baseApi";
+import type { Project, CreateProjectDto } from "./types";
 
-export const fetchProjects = () =>
-    $api.get<Project[]>("/projects");
+export async function getProjectsByUserId(userId: string) {
+    const projects = await request<Project[]>("/projects");
 
-export const fetchProjectById = (id: string) =>
-    $api.get<Project>(`/projects/${id}`);
+    return projects.filter(
+        (project) =>
+            project.owner === userId ||
+            project.members.some((member) => member.id === userId)
+    );
+}
 
-export const createProject = (dto: CreateProjectDto) =>
-    $api.post<Project>("/projects", dto);
-
-export const updateProject = (id: string, dto: UpdateProjectDto) =>
-    $api.patch<Project>(`/projects/${id}`, dto);
-
-export const deleteProject = (id: string) =>
-    $api.delete(`/projects/${id}`);
+export async function createProject(data: CreateProjectDto) {
+    return request<Project>("/projects", {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+}

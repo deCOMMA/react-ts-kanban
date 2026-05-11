@@ -1,103 +1,86 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import type { Nullable } from "@/src/shared/types";
-import type { Project, CreateProjectDto, UpdateProjectDto } from "./types";
+import type { Project } from "./types";
+import type { User } from "@/src/entities/user";
 import {
-    fetchProjects,
-    fetchProjectById,
     createProject,
-    updateProject,
-    deleteProject,
+    getProjectsByUserId,
 } from "./projectService";
 
 export class ProjectStore {
     projects: Project[] = [];
-    current: Nullable<Project> = null;
     isLoading = false;
-    error: Nullable<string> = null;
+    error: string | null = null;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    fetchAll = async () => {
+    async fetchProjects(userId: string) {
         this.isLoading = true;
         this.error = null;
 
         try {
-            const { data } = await fetchProjects();
+            const projects = await getProjectsByUserId(userId);
+
             runInAction(() => {
-                this.projects = data;
+                this.projects = projects;
             });
-        } catch {
+        } catch (e: unknown) {
             runInAction(() => {
-                this.error = "Не удалось загрузить проекты";
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка загрузки проектов";
             });
         } finally {
             runInAction(() => {
                 this.isLoading = false;
             });
         }
-    };
+    }
 
-    fetchById = async (id: string) => {
+    async createProject(user: User, title: string) {
         this.isLoading = true;
         this.error = null;
 
         try {
-            const { data } = await fetchProjectById(id);
-            runInAction(() => {
-                this.current = data;
+            const now = new Date().toISOString();
+
+            const projectKey = title
+                .trim()
+                .slice(0, 4)
+                .toUpperCase()
+                .replace(/[^A-ZА-Я0-9]/g, "");
+
+            const project = await createProject({
+                title: title.trim(),
+                description: "",
+                key: projectKey || "PROJ",
+                owner: user.id,
+                members: [
+                    {
+                        id: user.id,
+                        fullName: user.fullName,
+                        avatarUrl: user.avatarUrl,
+                    },
+                ],
+                boards: [],
             });
-        } catch {
+
             runInAction(() => {
-                this.error = "Не удалось загрузить проект";
+                this.projects.push(project);
             });
+
+            return true;
+        } catch (e: unknown) {
+            runInAction(() => {
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка создания проекта";
+            });
+
+            return false;
         } finally {
             runInAction(() => {
                 this.isLoading = false;
             });
         }
-    };
-
-    create = async (dto: CreateProjectDto) => {
-        try {
-            const { data } = await createProject(dto);
-            runInAction(() => {
-                this.projects.push(data);
-            });
-            return data;
-        } catch {
-            runInAction(() => {
-                this.error = "Не удалось создать проект";
-            });
-        }
-    };
-
-    update = async (id: string, dto: UpdateProjectDto) => {
-        try {
-            const { data } = await updateProject(id, dto);
-            runInAction(() => {
-                this.projects = this.projects.map((p) => (p.id === id ? data : p));
-                if (this.current?.id === id) this.current = data;
-            });
-        } catch {
-            runInAction(() => {
-                this.error = "Не удалось обновить проект";
-            });
-        }
-    };
-
-    delete = async (id: string) => {
-        try {
-            await deleteProject(id);
-            runInAction(() => {
-                this.projects = this.projects.filter((p) => p.id !== id);
-                if (this.current?.id === id) this.current = null;
-            });
-        } catch {
-            runInAction(() => {
-                this.error = "Не удалось удалить проект";
-            });
-        }
-    };
+    }
 }

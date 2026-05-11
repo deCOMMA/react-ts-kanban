@@ -17,9 +17,34 @@
       "createdAt": "2026-05-03T23:24:20.970Z",
       "updatedAt": "2026-05-03T23:24:20.970Z",
       "id": "qQT9DRXSJR0"
+    },
+    {
+      "fullName": "decomma",
+      "email": "test@test.ru",
+      "password": "123123",
+      "avatarUrl": null,
+      "createdAt": "2026-05-11T15:46:59.291Z",
+      "updatedAt": "2026-05-11T15:46:59.291Z",
+      "id": "BUA6V1dPjOw"
     }
   ],
-  "projects": [],
+  "projects": [
+    {
+      "title": "123",
+      "description": "",
+      "key": "123",
+      "owner": "BUA6V1dPjOw",
+      "members": [
+        {
+          "id": "BUA6V1dPjOw",
+          "fullName": "decomma",
+          "avatarUrl": null
+        }
+      ],
+      "boards": [],
+      "id": "snwx4FyVCrs"
+    }
+  ],
   "boards": [],
   "columns": [],
   "tasks": [],

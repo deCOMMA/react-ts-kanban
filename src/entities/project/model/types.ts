@@ -7,7 +7,7 @@ export interface Project {
   title: string;
   description?: string;
   key: string;
-  owner: UserPreview;
+  owner: string;
   members: UserPreview[];
   boards?: Board[];
   createdAt: string;

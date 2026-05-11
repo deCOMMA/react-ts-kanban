@@ -50,3 +50,34 @@ export const Actions = styled.nav`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
 `;
+
+export const AuthLink = styled(Link)`
+  text-decoration: none;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+
+  padding: 0 ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.textPrimary};
+`;
+
+export const UserName = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+export const NavLink = styled(Link)`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  text-decoration: none;
+
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
