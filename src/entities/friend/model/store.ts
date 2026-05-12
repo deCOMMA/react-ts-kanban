@@ -273,4 +273,53 @@ export class FriendStore {
             });
         }
     }
+    getFriendshipBetween(firstUserId: string, secondUserId: string) {
+        return (
+            this.friendships.find(
+                (friendship) =>
+                    friendship.userIds.includes(firstUserId) &&
+                    friendship.userIds.includes(secondUserId)
+            ) || null
+        );
+    }
+
+    getPendingRequestBetween(firstUserId: string, secondUserId: string) {
+        return (
+            this.friendRequests.find(
+                (request) =>
+                    request.status === "pending" &&
+                    ((request.fromUserId === firstUserId &&
+                        request.toUserId === secondUserId) ||
+                        (request.fromUserId === secondUserId &&
+                            request.toUserId === firstUserId))
+            ) || null
+        );
+    }
+
+    getRelationStatus(currentUserId: string, targetUserId: string) {
+        if (currentUserId === targetUserId) {
+            return "self";
+        }
+
+        const friendship = this.getFriendshipBetween(currentUserId, targetUserId);
+
+        if (friendship) {
+            return "friend";
+        }
+
+        const pendingRequest = this.getPendingRequestBetween(
+            currentUserId,
+            targetUserId
+        );
+
+        if (!pendingRequest) {
+            return "none";
+        }
+
+        if (pendingRequest.fromUserId === currentUserId) {
+            return "outgoing";
+        }
+
+        return "incoming";
+    }
 }

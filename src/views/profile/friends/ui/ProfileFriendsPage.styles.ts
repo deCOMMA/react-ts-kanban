@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import Link from "next/link";
+
+export const UserLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+
+  &:hover h3 {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
 
 export const PageGrid = styled.div`
   display: grid;

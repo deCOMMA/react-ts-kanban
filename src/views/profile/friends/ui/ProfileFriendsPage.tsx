@@ -96,10 +96,12 @@ export const ProfileFriendsPage = observer(function ProfileFriendsPage() {
                                     {!user.avatarUrl && user.fullName.slice(0, 1).toUpperCase()}
                                 </Styles.Avatar>
 
-                                <Styles.UserContent>
-                                    <Styles.UserName>{user.fullName}</Styles.UserName>
-                                    <Styles.Username>@{user.username}</Styles.Username>
-                                </Styles.UserContent>
+                                <Styles.UserLink href={`/users/${user.id}`}>
+                                    <Styles.UserContent>
+                                        <Styles.UserName>{user.fullName}</Styles.UserName>
+                                        <Styles.Username>@{user.username}</Styles.Username>
+                                    </Styles.UserContent>
+                                </Styles.UserLink>
 
                                 {isFriend ? (
                                     <Styles.StatusText>Уже в друзьях</Styles.StatusText>
@@ -143,11 +145,12 @@ export const ProfileFriendsPage = observer(function ProfileFriendsPage() {
                                     {!friend.avatarUrl &&
                                         friend.fullName.slice(0, 1).toUpperCase()}
                                 </Styles.Avatar>
-
-                                <Styles.UserContent>
-                                    <Styles.UserName>{friend.fullName}</Styles.UserName>
-                                    <Styles.Username>@{friend.username}</Styles.Username>
-                                </Styles.UserContent>
+                                <Styles.UserLink href={`/users/${friend.id}`}>
+                                    <Styles.UserContent>
+                                        <Styles.UserName>{friend.fullName}</Styles.UserName>
+                                        <Styles.Username>@{friend.username}</Styles.Username>
+                                    </Styles.UserContent>
+                                </Styles.UserLink>
 
                                 <Button
                                     size="sm"
@@ -189,11 +192,12 @@ export const ProfileFriendsPage = observer(function ProfileFriendsPage() {
                                         {!user.avatarUrl &&
                                             user.fullName.slice(0, 1).toUpperCase()}
                                     </Styles.Avatar>
-
-                                    <Styles.UserContent>
-                                        <Styles.UserName>{user.fullName}</Styles.UserName>
-                                        <Styles.Username>@{user.username}</Styles.Username>
-                                    </Styles.UserContent>
+                                    <Styles.UserLink href={`/users/${user.id}`}>
+                                        <Styles.UserContent>
+                                            <Styles.UserName>{user.fullName}</Styles.UserName>
+                                            <Styles.Username>@{user.username}</Styles.Username>
+                                        </Styles.UserContent>
+                                    </Styles.UserLink>
 
                                     <Styles.Actions>
                                         <Button
@@ -250,11 +254,12 @@ export const ProfileFriendsPage = observer(function ProfileFriendsPage() {
                                         {!user.avatarUrl &&
                                             user.fullName.slice(0, 1).toUpperCase()}
                                     </Styles.Avatar>
-
-                                    <Styles.UserContent>
-                                        <Styles.UserName>{user.fullName}</Styles.UserName>
-                                        <Styles.Username>@{user.username}</Styles.Username>
-                                    </Styles.UserContent>
+                                    <Styles.UserLink href={`/users/${user.id}`}>
+                                        <Styles.UserContent>
+                                            <Styles.UserName>{user.fullName}</Styles.UserName>
+                                            <Styles.Username>@{user.username}</Styles.Username>
+                                        </Styles.UserContent>
+                                    </Styles.UserLink>
 
                                     <Styles.StatusText>Ожидает ответа</Styles.StatusText>
                                 </Styles.UserCard>
