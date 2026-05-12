@@ -147,7 +147,7 @@ export class FriendStore {
             });
 
             runInAction(() => {
-                this.friendRequests.push(request);
+                this.friendRequests = [...this.friendRequests, request];
             });
 
             return true;
@@ -187,7 +187,7 @@ export class FriendStore {
                     item.id === request.id ? updatedRequest : item
                 );
 
-                this.friendships.push(friendship);
+                this.friendships = [...this.friendships, friendship];
             });
 
             return true;
