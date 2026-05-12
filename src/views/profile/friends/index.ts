@@ -1,0 +1,1 @@
+export { ProfileFriendsPage } from './ui/ProfileFriendsPage'

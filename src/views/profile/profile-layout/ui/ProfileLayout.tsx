@@ -3,16 +3,24 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { EditIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
-import * as Styles from "./ProfilePage.styles";
+import * as Styles from "./ProfileLayout.styles";
 import { Button } from "@/src/shared/ui/Button";
 import { Input } from "@/src/shared/ui/Input";
 import { Textarea } from "@/src/shared/ui/TextArea";
 import { Modal } from "@/src/shared/ui/Modal";
 import { useStore } from "@/src/app/providers/rootStore/StoreProviders";
 
-export const ProfilePage = observer(function ProfilePage() {
-    const { authStore, projectStore } = useStore();
+interface ProfileLayoutProps {
+    children: React.ReactNode;
+}
+
+export const ProfileLayout = observer(function ProfileLayout({
+    children,
+}: ProfileLayoutProps) {
+    const pathname = usePathname();
+    const { authStore, projectStore, friendStore } = useStore();
 
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [fullName, setFullName] = useState("");
@@ -29,7 +37,11 @@ export const ProfilePage = observer(function ProfilePage() {
         }
 
         projectStore.fetchProjects(user.id);
-    }, [user?.id, projectStore]);
+
+        if (friendStore) {
+            friendStore.fetchAll();
+        }
+    }, [user?.id, projectStore, friendStore]);
 
     const handleOpenEdit = () => {
         if (!user) {
@@ -88,6 +100,7 @@ export const ProfilePage = observer(function ProfilePage() {
     }
 
     const avatarLetter = user.fullName.slice(0, 1).toUpperCase();
+    const friendsCount = friendStore ? friendStore.getFriends(user.id).length : 0;
 
     return (
         <Styles.Page>
@@ -123,7 +136,7 @@ export const ProfilePage = observer(function ProfilePage() {
                     </Styles.StatCard>
 
                     <Styles.StatCard>
-                        <Styles.StatValue>0</Styles.StatValue>
+                        <Styles.StatValue>{friendsCount}</Styles.StatValue>
                         <Styles.StatLabel>Друзей</Styles.StatLabel>
                     </Styles.StatCard>
 
@@ -133,19 +146,34 @@ export const ProfilePage = observer(function ProfilePage() {
                     </Styles.StatCard>
                 </Styles.StatsGrid>
 
-                <Styles.Section>
-                    <Styles.SectionTitle>Недавняя активность</Styles.SectionTitle>
-                    <Styles.MutedText>
-                        Активность появится здесь после добавления системы событий.
-                    </Styles.MutedText>
-                </Styles.Section>
+                <Styles.Tabs>
+                    <Styles.TabLink href="/profile" $active={pathname === "/profile"}>
+                        Обзор
+                    </Styles.TabLink>
 
-                <Styles.Section>
-                    <Styles.SectionTitle>Друзья</Styles.SectionTitle>
-                    <Styles.MutedText>
-                        Список друзей появится после добавления заявок и поиска пользователей.
-                    </Styles.MutedText>
-                </Styles.Section>
+                    <Styles.TabLink
+                        href="/profile/projects"
+                        $active={pathname === "/profile/projects"}
+                    >
+                        Проекты
+                    </Styles.TabLink>
+
+                    <Styles.TabLink
+                        href="/profile/friends"
+                        $active={pathname === "/profile/friends"}
+                    >
+                        Друзья
+                    </Styles.TabLink>
+
+                    <Styles.TabLink
+                        href="/profile/activity"
+                        $active={pathname === "/profile/activity"}
+                    >
+                        Активность
+                    </Styles.TabLink>
+                </Styles.Tabs>
+
+                <Styles.Content>{children}</Styles.Content>
             </Styles.Container>
 
             <Modal

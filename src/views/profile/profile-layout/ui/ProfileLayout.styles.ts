@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Page = styled.main`
@@ -23,6 +24,12 @@ export const ProfileCard = styled.section`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radius.xl};
   box-shadow: ${({ theme }) => theme.shadow.card};
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
 `;
 
 export const Avatar = styled.div<{ $src?: string | null }>`
@@ -34,6 +41,7 @@ export const Avatar = styled.div<{ $src?: string | null }>`
   justify-content: center;
 
   border-radius: 999px;
+
   background: ${({ $src }) =>
         $src ? `url(${$src}) center / cover no-repeat` : "rgb(37 99 235 / 0.12)"};
 
@@ -79,6 +87,10 @@ export const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const StatCard = styled.div`
@@ -102,26 +114,42 @@ export const StatLabel = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-export const Section = styled.section`
+export const Tabs = styled.nav`
   margin-top: ${({ theme }) => theme.spacing.xl};
-  padding: ${({ theme }) => theme.spacing.xxl};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
 
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.radius.xl};
-  box-shadow: ${({ theme }) => theme.shadow.card};
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
-export const SectionTitle = styled.h2`
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  font-size: 20px;
-  color: ${({ theme }) => theme.colors.textPrimary};
-`;
+export const TabLink = styled(Link) <{ $active: boolean }>`
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
 
-export const MutedText = styled.p`
+  color: ${({ theme, $active }) =>
+        $active ? theme.colors.primary : theme.colors.textSecondary};
+
+  border-bottom: 2px solid
+    ${({ theme, $active }) => ($active ? theme.colors.primary : "transparent")};
+
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  font-weight: 500;
+  text-decoration: none;
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+    background: rgb(37 99 235 / 0.06);
+  }
 `;
+
+export const Content = styled.div``;
 
 export const Form = styled.form`
   display: flex;
