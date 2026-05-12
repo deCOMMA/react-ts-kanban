@@ -24,7 +24,7 @@ export class BoardStore {
         this.error = null;
 
         try {
-            const { data } = await fetchBoardsByProject(projectId);
+            const data = await fetchBoardsByProject(projectId);
             runInAction(() => {
                 this.boards = data;
             });
@@ -44,7 +44,7 @@ export class BoardStore {
         this.error = null;
 
         try {
-            const { data } = await fetchBoardById(id);
+            const data = await fetchBoardById(id);
             runInAction(() => {
                 this.current = data;
             });
@@ -61,7 +61,7 @@ export class BoardStore {
 
     create = async (projectId: string, dto: CreateBoardDto) => {
         try {
-            const { data } = await createBoard(projectId, dto);
+            const data = await createBoard(projectId, dto);
             runInAction(() => {
                 this.boards.push(data);
             });
@@ -75,7 +75,7 @@ export class BoardStore {
 
     update = async (id: string, dto: UpdateBoardDto) => {
         try {
-            const { data } = await updateBoard(id, dto);
+            const data = await updateBoard(id, dto);
             runInAction(() => {
                 this.boards = this.boards.map((b) => (b.id === id ? data : b));
                 if (this.current?.id === id) this.current = data;

@@ -31,7 +31,7 @@ export class TaskStore {
         this.error = null;
 
         try {
-            const { data } = await fetchTasksByBoard(boardId);
+            const data = await fetchTasksByBoard(boardId);
             runInAction(() => {
                 this.tasks = data;
             });
@@ -51,7 +51,7 @@ export class TaskStore {
         this.error = null;
 
         try {
-            const { data } = await fetchTaskById(id);
+            const data = await fetchTaskById(id);
             runInAction(() => {
                 this.current = data;
             });
@@ -68,7 +68,7 @@ export class TaskStore {
 
     create = async (dto: CreateTaskDto) => {
         try {
-            const { data } = await createTask(dto);
+            const data = await createTask(dto);
             runInAction(() => {
                 this.tasks.push(data);
             });
@@ -82,7 +82,7 @@ export class TaskStore {
 
     update = async (id: string, dto: UpdateTaskDto) => {
         try {
-            const { data } = await updateTask(id, dto);
+            const data = await updateTask(id, dto);
             runInAction(() => {
                 this.tasks = this.tasks.map((t) => (t.id === id ? data : t));
                 if (this.current?.id === id) this.current = data;
@@ -104,7 +104,7 @@ export class TaskStore {
         });
 
         try {
-            const { data } = await moveTask(id, dto);
+            const data = await moveTask(id, dto);
             runInAction(() => {
                 this.tasks = this.tasks.map((t) => (t.id === id ? data : t));
             });

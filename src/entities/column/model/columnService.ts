@@ -1,17 +1,31 @@
-import { $api } from "@/src/shared/api/axios";
+import { request } from "@/src/shared/api/baseApi";
 import type { Column, CreateColumnDto, UpdateColumnDto } from "./types";
 
-export const fetchColumns = (boardId: string) =>
-    $api.get<Column[]>(`/boards/${boardId}/columns`);
+export async function fetchColumns(boardId: string) {
+    const columns = await request<Column[]>("/columns");
 
-export const createColumn = (boardId: string, dto: CreateColumnDto) =>
-    $api.post<Column>(`/boards/${boardId}/columns`, dto);
+    return columns.filter((column) => column.boardId === boardId);
+}
 
-export const updateColumn = (id: string, dto: UpdateColumnDto) =>
-    $api.patch<Column>(`/columns/${id}`, dto);
+export async function createColumn(boardId: string, dto: CreateColumnDto) {
+    return request<Column>("/columns", {
+        method: "POST",
+        body: JSON.stringify({
+            ...dto,
+            boardId,
+        }),
+    });
+}
 
-export const deleteColumn = (id: string) =>
-    $api.delete(`/columns/${id}`);
+export async function updateColumn(id: string, dto: UpdateColumnDto) {
+    return request<Column>(`/columns/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(dto),
+    });
+}
 
-export const reorderColumns = (boardId: string, orderedIds: string[]) =>
-    $api.patch(`/boards/${boardId}/columns/reorder`, { orderedIds });
+export async function deleteColumn(id: string) {
+    return request<Column>(`/columns/${id}`, {
+        method: "DELETE",
+    });
+}

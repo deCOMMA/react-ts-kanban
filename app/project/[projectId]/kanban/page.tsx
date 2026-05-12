@@ -1,4 +1,3 @@
-import { ProtectedRoute } from "@/src/shared/helpers/components/";
 import { ProjectKanbanPage } from "@/src/views/projects/project-kanban";
 
 interface ProjectKanbanRouteProps {
@@ -12,9 +11,5 @@ export default async function ProjectKanbanRoute({
 }: ProjectKanbanRouteProps) {
     const { projectId } = await params;
 
-    return (
-        <ProtectedRoute>
-            <ProjectKanbanPage projectId={projectId} />
-        </ProtectedRoute>
-    );
+    return <ProjectKanbanPage projectId={projectId} />;
 }

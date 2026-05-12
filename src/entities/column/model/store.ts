@@ -1,11 +1,10 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import type { Column, CreateColumnDto, UpdateColumnDto } from "./types";
+import type { Column } from "./types";
 import {
-    fetchColumns,
     createColumn,
-    updateColumn,
     deleteColumn,
-    reorderColumns,
+    fetchColumns,
+    updateColumn,
 } from "./columnService";
 
 export class ColumnStore {
@@ -17,87 +16,132 @@ export class ColumnStore {
         makeAutoObservable(this);
     }
 
-    get sorted() {
+    get sortedColumns() {
         return [...this.columns].sort((a, b) => a.order - b.order);
     }
 
-    fetchByBoard = async (boardId: string) => {
+    async fetchByBoard(boardId: string) {
         this.isLoading = true;
         this.error = null;
 
         try {
-            const { data } = await fetchColumns(boardId);
+            const columns = await fetchColumns(boardId);
+
             runInAction(() => {
-                this.columns = data;
+                this.columns = columns;
             });
-        } catch {
+        } catch (e: unknown) {
             runInAction(() => {
-                this.error = "Не удалось загрузить колонки";
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка загрузки колонок";
             });
         } finally {
             runInAction(() => {
                 this.isLoading = false;
             });
         }
-    };
+    }
 
-    create = async (boardId: string, dto: CreateColumnDto) => {
-        try {
-            const { data } = await createColumn(boardId, dto);
-            runInAction(() => {
-                this.columns.push(data);
-            });
-            return data;
-        } catch {
-            runInAction(() => {
-                this.error = "Не удалось создать колонку";
-            });
+    async create(
+        boardId: string,
+        data: {
+            title: string;
+            color?: string;
         }
-    };
-
-    update = async (id: string, dto: UpdateColumnDto) => {
-        try {
-            const { data } = await updateColumn(id, dto);
-            runInAction(() => {
-                this.columns = this.columns.map((c) => (c.id === id ? data : c));
-            });
-        } catch {
-            runInAction(() => {
-                this.error = "Не удалось обновить колонку";
-            });
-        }
-    };
-
-    delete = async (id: string) => {
-        try {
-            await deleteColumn(id);
-            runInAction(() => {
-                this.columns = this.columns.filter((c) => c.id !== id);
-            });
-        } catch {
-            runInAction(() => {
-                this.error = "Не удалось удалить колонку";
-            });
-        }
-    };
-
-    reorder = async (boardId: string, orderedIds: string[]) => {
-        const prev = [...this.columns];
-
-        runInAction(() => {
-            this.columns = orderedIds.map((id, index) => {
-                const col = this.columns.find((c) => c.id === id)!;
-                return { ...col, order: index };
-            });
-        });
+    ) {
+        this.isLoading = true;
+        this.error = null;
 
         try {
-            await reorderColumns(boardId, orderedIds);
-        } catch {
+            const now = new Date().toISOString();
+
+            const column = await createColumn(boardId, {
+                title: data.title.trim(),
+                color: data.color,
+                boardId,
+                order: this.columns.length,
+                tasks: [],
+            });
+
             runInAction(() => {
-                this.columns = prev;
-                this.error = "Не удалось сохранить порядок колонок";
+                this.columns.push(column);
+            });
+
+            return column;
+        } catch (e: unknown) {
+            runInAction(() => {
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка создания колонки";
+            });
+
+            return null;
+        } finally {
+            runInAction(() => {
+                this.isLoading = false;
             });
         }
-    };
+    }
+
+    async update(
+        columnId: string,
+        data: {
+            title: string;
+            color?: string;
+        }
+    ) {
+        this.isLoading = true;
+        this.error = null;
+
+        try {
+            const updatedColumn = await updateColumn(columnId, {
+                title: data.title.trim(),
+                color: data.color,
+            });
+
+            runInAction(() => {
+                this.columns = this.columns.map((column) =>
+                    column.id === columnId ? updatedColumn : column
+                );
+            });
+
+            return updatedColumn;
+        } catch (e: unknown) {
+            runInAction(() => {
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка обновления колонки";
+            });
+
+            return null;
+        } finally {
+            runInAction(() => {
+                this.isLoading = false;
+            });
+        }
+    }
+
+    async delete(columnId: string) {
+        this.isLoading = true;
+        this.error = null;
+
+        try {
+            await deleteColumn(columnId);
+
+            runInAction(() => {
+                this.columns = this.columns.filter((column) => column.id !== columnId);
+            });
+
+            return true;
+        } catch (e: unknown) {
+            runInAction(() => {
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка удаления колонки";
+            });
+
+            return false;
+        } finally {
+            runInAction(() => {
+                this.isLoading = false;
+            });
+        }
+    }
 }

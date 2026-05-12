@@ -1,0 +1,1 @@
+export { ProjectInfoPage } from "./ui/ProjectInfoPage";

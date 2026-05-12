@@ -1,17 +1,35 @@
-import { $api } from "@/src/shared/api/axios";
+import { request } from "@/src/shared/api/baseApi";
 import type { Board, CreateBoardDto, UpdateBoardDto } from "./types";
 
-export const fetchBoardsByProject = (projectId: string) =>
-    $api.get<Board[]>(`/projects/${projectId}/boards`);
+export async function fetchBoardsByProject(projectId: string) {
+    const boards = await request<Board[]>("/boards");
 
-export const fetchBoardById = (id: string) =>
-    $api.get<Board>(`/boards/${id}`);
+    return boards.filter((board) => board.projectId === projectId);
+}
 
-export const createBoard = (projectId: string, dto: CreateBoardDto) =>
-    $api.post<Board>(`/projects/${projectId}/boards`, dto);
+export async function fetchBoardById(id: string) {
+    return request<Board>(`/boards/${id}`);
+}
 
-export const updateBoard = (id: string, dto: UpdateBoardDto) =>
-    $api.patch<Board>(`/boards/${id}`, dto);
+export async function createBoard(projectId: string, dto: CreateBoardDto) {
+    return request<Board>("/boards", {
+        method: "POST",
+        body: JSON.stringify({
+            ...dto,
+            projectId,
+        }),
+    });
+}
 
-export const deleteBoard = (id: string) =>
-    $api.delete(`/boards/${id}`);
+export async function updateBoard(id: string, dto: UpdateBoardDto) {
+    return request<Board>(`/boards/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(dto),
+    });
+}
+
+export async function deleteBoard(id: string) {
+    return request<Board>(`/boards/${id}`, {
+        method: "DELETE",
+    });
+}
