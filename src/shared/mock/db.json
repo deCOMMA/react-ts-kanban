@@ -16,10 +16,10 @@
       "username": "decomma",
       "email": "serbinovskijdima@gmail.com1",
       "password": "123123",
-      "avatarUrl": null,
+      "avatarUrl": "https://i.pinimg.com/736x/a5/8b/1e/a58b1ea75bd9f25ae5ffa9232c4b3366.jpg",
       "bio": null,
       "createdAt": "2026-05-12T14:33:21.805Z",
-      "updatedAt": "2026-05-12T14:33:21.805Z",
+      "updatedAt": "2026-05-12T14:41:17.801Z",
       "id": "FY2NAil-yUY"
     }
   ],
@@ -469,5 +469,7 @@
   ],
   "tasks": [],
   "comments": [],
+  "friendRequests": [],
+  "friendships": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
