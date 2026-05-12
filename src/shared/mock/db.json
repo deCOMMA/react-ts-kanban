@@ -267,22 +267,6 @@
       "id": "x7d05gHw_nM"
     },
     {
-      "title": "DSFSDFDS",
-      "order": 0,
-      "color": "rgb(124 58 237)",
-      "boardId": "ufY0hfpV06E",
-      "tasks": [],
-      "id": "SJu7DhV_E-k"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(124 58 237)",
-      "boardId": "ufY0hfpV06E",
-      "tasks": [],
-      "id": "8qg8NjhBgRE"
-    },
-    {
       "title": "Бэклог",
       "order": 0,
       "color": "rgb(107 114 128)",
@@ -379,12 +363,28 @@
       "id": "zTxx1tomqc0"
     },
     {
-      "title": "gdfgdf",
-      "color": "rgb(124 58 237)",
+      "title": "34534534",
+      "color": "rgb(107 114 128)",
       "boardId": "ufY0hfpV06E",
-      "order": 4,
+      "order": 2,
       "tasks": [],
-      "id": "r277SX_42rQ"
+      "id": "NCJ47nEMsFA"
+    },
+    {
+      "title": "345543",
+      "color": "rgb(107 114 128)",
+      "boardId": "ufY0hfpV06E",
+      "order": 3,
+      "tasks": [],
+      "id": "CYvSyXzC_uY"
+    },
+    {
+      "title": "34543",
+      "color": "rgb(107 114 128)",
+      "boardId": "ufY0hfpV06E",
+      "order": 2,
+      "tasks": [],
+      "id": "42qjCDJxlOI"
     }
   ],
   "tasks": [],

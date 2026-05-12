@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { PlusIcon } from "lucide-react";
 
 import * as Styles from "./ColumnModal.styles";
 import { Modal } from "@/src/shared/ui/Modal";
@@ -17,6 +18,30 @@ const COLUMN_COLORS = [
     "rgb(124 58 237)",
 ];
 
+const hexToRgb = (hex: string) => {
+    const value = hex.replace("#", "");
+
+    const r = parseInt(value.slice(0, 2), 16);
+    const g = parseInt(value.slice(2, 4), 16);
+    const b = parseInt(value.slice(4, 6), 16);
+
+    return `rgb(${r} ${g} ${b})`;
+};
+
+const rgbToHex = (rgb: string) => {
+    const match = rgb.match(/\d+/g);
+
+    if (!match || match.length < 3) {
+        return "#6b7280";
+    }
+
+    const [r, g, b] = match.map(Number);
+
+    return `#${[r, g, b]
+        .map((value) => value.toString(16).padStart(2, "0"))
+        .join("")}`;
+};
+
 interface ColumnModalProps {
     isOpen: boolean;
     column?: Column | null;
@@ -32,11 +57,14 @@ export function ColumnModal({
     onClose,
     onSubmit,
 }: ColumnModalProps) {
+    const colorInputRef = useRef<HTMLInputElement | null>(null);
+
     const [title, setTitle] = useState("");
     const [color, setColor] = useState(COLUMN_COLORS[0]);
     const [error, setError] = useState("");
 
     const isEdit = Boolean(column);
+    const isCustomColor = !COLUMN_COLORS.includes(color);
 
     useEffect(() => {
         if (!isOpen) {
@@ -81,8 +109,8 @@ export function ColumnModal({
                     onChange={(event) => setTitle(event.target.value)}
                 />
 
-                <div>
-                    <Input label="Выбранный цвет" value={color} disabled />
+                <Styles.ColorField>
+                    <Styles.ColorLabel>Цвет колонки</Styles.ColorLabel>
 
                     <Styles.ColorGrid>
                         {COLUMN_COLORS.map((item) => (
@@ -92,10 +120,32 @@ export function ColumnModal({
                                 $color={item}
                                 $active={item === color}
                                 onClick={() => setColor(item)}
+                                title={item}
                             />
                         ))}
+
+                        <Styles.CustomColorButton
+                            type="button"
+                            $active={isCustomColor}
+                            $color={color}
+                            onClick={() => colorInputRef.current?.click()}
+                            title="Выбрать свой цвет"
+                        >
+                            <PlusIcon size={18} />
+                        </Styles.CustomColorButton>
+
+                        <Styles.HiddenColorInput
+                            ref={colorInputRef}
+                            type="color"
+                            value={rgbToHex(color)}
+                            onChange={(event) => setColor(hexToRgb(event.target.value))}
+                        />
                     </Styles.ColorGrid>
-                </div>
+
+                    <Styles.SelectedColorText>
+                        Выбранный цвет: <span>{color}</span>
+                    </Styles.SelectedColorText>
+                </Styles.ColorField>
 
                 {error && <Styles.ErrorText>{error}</Styles.ErrorText>}
 

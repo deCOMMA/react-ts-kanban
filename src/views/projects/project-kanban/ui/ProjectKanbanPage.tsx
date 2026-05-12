@@ -50,9 +50,9 @@ export const ProjectKanbanPage = observer(function ProjectKanbanPage({
                         color: column.color,
                     });
                 }
-
                 await columnStore.fetchByBoard(board.id);
             }
+            console.log(columnStore.columns.length)
 
             await taskStore.fetchByBoard(board.id);
         };
