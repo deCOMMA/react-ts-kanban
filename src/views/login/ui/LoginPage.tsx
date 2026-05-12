@@ -22,7 +22,7 @@ export function LoginPage() {
         console.log(success)
 
         if (success) {
-            router.push("/project");
+            router.push("/profile");
         }
     };
 

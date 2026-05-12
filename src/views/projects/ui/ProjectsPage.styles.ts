@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import type { ProjectRole } from "@/src/entities/project-member";
 
 export const Page = styled.main`
   min-height: calc(100vh - 64px);
@@ -103,4 +104,35 @@ export const ErrorText = styled.p`
   margin-bottom: ${({ theme }) => theme.spacing.md};
   font-size: 14px;
   color: ${({ theme }) => theme.colors.danger};
+`;
+
+export const ProjectHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.spacing.md};
+`;
+
+export const RoleBadge = styled.span<{ $role: ProjectRole }>`
+  flex-shrink: 0;
+
+  padding: 4px 8px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: ${({ $role }) => {
+    if ($role === "owner") return "rgb(37 99 235)";
+    if ($role === "admin") return "rgb(124 58 237)";
+    if ($role === "member") return "rgb(22 163 74)";
+    return "rgb(107 114 128)";
+  }};
+
+  background: ${({ $role }) => {
+    if ($role === "owner") return "rgb(37 99 235 / 0.1)";
+    if ($role === "admin") return "rgb(124 58 237 / 0.1)";
+    if ($role === "member") return "rgb(22 163 74 / 0.1)";
+    return "rgb(107 114 128 / 0.1)";
+  }};
 `;

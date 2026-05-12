@@ -8,16 +8,19 @@ import * as Styles from "./ProjectsPage.styles";
 import { Button } from "@/src/shared/ui/Button";
 import { useStore } from "@/src/app/providers/rootStore/StoreProviders";
 import { useRouter } from "next/navigation";
+import { PROJECT_ROLE_LABEL } from "@/src/entities/project-member";
 
 export const ProjectsPage = observer(function ProjectsPage() {
-    const { authStore, projectStore } = useStore();
+
+    const { authStore, projectStore, projectMemberStore } = useStore();
     useEffect(() => {
         if (!authStore.user?.id) {
             return;
         }
 
         projectStore.fetchProjects(authStore.user.id);
-    }, [authStore.user?.id, projectStore]);
+        projectMemberStore.fetchAll();
+    }, [authStore.user?.id, projectStore, projectMemberStore]);
 
     const router = useRouter();
 
@@ -49,18 +52,27 @@ export const ProjectsPage = observer(function ProjectsPage() {
                     <Styles.EmptyState>Загрузка проектов...</Styles.EmptyState>
                 ) : projectStore.projects.length > 0 ? (
                     <Styles.Grid>
-                        {projectStore.projects.map((project) => (
-                            <Styles.ProjectCard
-                                key={project.id}
-                                href={`/project/${project.id}/kanban`}
-                            >
-                                <Styles.ProjectTitle>{project.title}</Styles.ProjectTitle>
+                        {projectStore.projects.map((project) => {
+                            const role = authStore.user
+                                ? projectMemberStore.getUserProjectRole(project.id, authStore.user.id)
+                                : null;
 
-                                <Styles.ProjectDescription>
-                                    {project.description || "Описание проекта пока не добавлено"}
-                                </Styles.ProjectDescription>
-                            </Styles.ProjectCard>
-                        ))}
+                            return (
+                                <Styles.ProjectCard key={project.id} href={`/project/${project.id}/kanban`}>
+                                    <Styles.ProjectHeader>
+                                        <Styles.ProjectTitle>{project.title}</Styles.ProjectTitle>
+
+                                        <Styles.RoleBadge $role={role || "member"}>
+                                            {role ? PROJECT_ROLE_LABEL[role] : "Участник"}
+                                        </Styles.RoleBadge>
+                                    </Styles.ProjectHeader>
+
+                                    <Styles.ProjectDescription>
+                                        {project.description || "Описание проекта не добавлено"}
+                                    </Styles.ProjectDescription>
+                                </Styles.ProjectCard>
+                            );
+                        })}
                     </Styles.Grid>
                 ) : (
                     <Styles.EmptyState>

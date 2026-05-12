@@ -22,7 +22,7 @@ export type RequireFields<T, K extends keyof T> = T & Required<Pick<T, K>>;
 export type CreateDto<T> = Omit<T, "id" | "createdAt" | "updatedAt">;
 
 /** DTO для обновления: убираем серверные поля, всё остальное опционально */
-export type UpdateDto<T> = Partial<Omit<T, "id" | "createdAt" | "updatedAt">>;
+export type UpdateDto<T> = Partial<Omit<T, "id" | "createdAt">>;
 
 /** Стандартный ответ сервера со списком */
 export type PaginatedResponse<T> = {

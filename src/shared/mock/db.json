@@ -37,445 +37,38 @@
   "projects": [
     {
       "title": "123",
-      "description": "",
+      "description": "123",
       "key": "123",
-      "owner": "BUA6V1dPjOw",
-      "members": [
-        {
-          "id": "BUA6V1dPjOw",
-          "fullName": "decomma",
-          "avatarUrl": null
-        }
-      ],
-      "boards": [],
-      "id": "snwx4FyVCrs"
-    },
-    {
-      "title": "123",
-      "description": "dfsdfsdfdsf",
-      "key": "123",
-      "owner": "1",
-      "members": [
-        {
-          "id": "1",
-          "fullName": "Dmitriy",
-          "avatarUrl": null
-        }
-      ],
-      "boards": [],
-      "id": "S4DaNN2DAqg"
-    },
-    {
-      "title": "234",
-      "description": "234",
-      "key": "234",
-      "owner": "1",
-      "members": [
-        {
-          "id": "1",
-          "fullName": "Dmitriy",
-          "avatarUrl": null
-        }
-      ],
-      "boards": [],
-      "id": "HToQevq0pKE"
-    },
-    {
-      "title": "Тестовый проект для мучений",
-      "description": "Испытательный проект который будет принимать очень больно X_X",
-      "key": "ТЕСТ",
-      "owner": "1",
-      "members": [
-        {
-          "id": "1",
-          "fullName": "Dmitriy",
-          "avatarUrl": null
-        }
-      ],
-      "boards": [],
-      "id": "DCWb5_unr5M"
-    },
-    {
-      "title": "534",
-      "description": "345",
-      "key": "534",
-      "owner": "1",
-      "members": [
-        {
-          "id": "1",
-          "fullName": "Dmitriy",
-          "avatarUrl": null
-        }
-      ],
-      "boards": [],
-      "id": "ULXpvcDbUtc"
-    },
-    {
-      "title": "Диплом",
-      "description": "просто делаю диплом с друзьями",
-      "key": "ДИПЛ",
       "owner": "FY2NAil-yUY",
       "members": [
         {
           "id": "FY2NAil-yUY",
           "fullName": "Дима",
-          "avatarUrl": null
+          "avatarUrl": "https://i.pinimg.com/736x/a5/8b/1e/a58b1ea75bd9f25ae5ffa9232c4b3366.jpg"
+        },
+        {
+          "id": "JH7VlipT7Ug",
+          "fullName": "леха",
+          "avatarUrl": "https://i.pinimg.com/736x/79/6b/80/796b80d7043813dd3dfd4db2fca7a252.jpg"
         }
       ],
       "boards": [],
-      "id": "TWFbmlSYlpc"
+      "id": "rBBGLJWBzNc",
+      "updatedAt": "2026-05-12T18:43:58.741Z"
     }
   ],
   "boards": [
     {
       "title": "Основная доска",
-      "projectId": "S4DaNN2DAqg",
+      "projectId": "rBBGLJWBzNc",
       "columns": [],
-      "id": "ukcTlXvC-Uw"
+      "id": "DEb2aKUQAjc"
     },
     {
       "title": "Основная доска",
-      "projectId": "HToQevq0pKE",
+      "projectId": "rBBGLJWBzNc",
       "columns": [],
-      "id": "Izht8IPwmb8"
-    },
-    {
-      "title": "Основная доска",
-      "projectId": "DCWb5_unr5M",
-      "columns": [],
-      "id": "ufY0hfpV06E"
-    },
-    {
-      "title": "Основная доска",
-      "projectId": "ULXpvcDbUtc",
-      "columns": [],
-      "id": "m474CGrL7zo"
-    },
-    {
-      "title": "Основная доска",
-      "projectId": "ULXpvcDbUtc",
-      "columns": [],
-      "id": "d9_T41NEQ2s"
-    },
-    {
-      "title": "Основная доска",
-      "projectId": "TWFbmlSYlpc",
-      "columns": [],
-      "id": "Jcqk2dBgYFE"
-    }
-  ],
-  "columns": [
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "ukcTlXvC-Uw",
-      "tasks": [],
-      "id": "sSCX8A_wbR0"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "ukcTlXvC-Uw",
-      "tasks": [],
-      "id": "-JAe9erTgEE"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "ukcTlXvC-Uw",
-      "tasks": [],
-      "id": "K1F53f1KA7c"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "ukcTlXvC-Uw",
-      "tasks": [],
-      "id": "MbqrEAYooh4"
-    },
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "R4xWqM5LBgk",
-      "tasks": [],
-      "id": "EJtL18mbNFk"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "R4xWqM5LBgk",
-      "tasks": [],
-      "id": "GNbcT_PHzwA"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "R4xWqM5LBgk",
-      "tasks": [],
-      "id": "1IZSsucnJ8o"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "R4xWqM5LBgk",
-      "tasks": [],
-      "id": "lWz8XfdWsVQ"
-    },
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "Izht8IPwmb8",
-      "tasks": [],
-      "id": "CyU6hA6gNEI"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "Izht8IPwmb8",
-      "tasks": [],
-      "id": "7bmZsQhMGJY"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "Izht8IPwmb8",
-      "tasks": [],
-      "id": "24xlAQNRBnM"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "Izht8IPwmb8",
-      "tasks": [],
-      "id": "IIPY0xa3cr4"
-    },
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "sbpzrLkB71g",
-      "tasks": [],
-      "id": "DOu8afi_yMs"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "sbpzrLkB71g",
-      "tasks": [],
-      "id": "x45CvRFYmHk"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "sbpzrLkB71g",
-      "tasks": [],
-      "id": "-blvDqTOONo"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "sbpzrLkB71g",
-      "tasks": [],
-      "id": "x7d05gHw_nM"
-    },
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "Bum7N9goL7M",
-      "tasks": [],
-      "id": "gXp92WVY1do"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "Bum7N9goL7M",
-      "tasks": [],
-      "id": "AwcdOK6juF4"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "Bum7N9goL7M",
-      "tasks": [],
-      "id": "q5wQ0tc0mTA"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "Bum7N9goL7M",
-      "tasks": [],
-      "id": "zxfjJ9iAisY"
-    },
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "m474CGrL7zo",
-      "tasks": [],
-      "id": "4y1rX6Cqg3Q"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "m474CGrL7zo",
-      "tasks": [],
-      "id": "22VNG1AQNGs"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "m474CGrL7zo",
-      "tasks": [],
-      "id": "Wkv7V1fvC5k"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "m474CGrL7zo",
-      "tasks": [],
-      "id": "-TkixZcj764"
-    },
-    {
-      "title": "Бэклог",
-      "order": 0,
-      "color": "rgb(107 114 128)",
-      "boardId": "d9_T41NEQ2s",
-      "tasks": [],
-      "id": "JP3E12gSiQ4"
-    },
-    {
-      "title": "В работе",
-      "order": 1,
-      "color": "rgb(59 130 246)",
-      "boardId": "d9_T41NEQ2s",
-      "tasks": [],
-      "id": "HQS6pqYCV7o"
-    },
-    {
-      "title": "Ревью",
-      "order": 2,
-      "color": "rgb(245 158 11)",
-      "boardId": "d9_T41NEQ2s",
-      "tasks": [],
-      "id": "Iv1vvA3yYf0"
-    },
-    {
-      "title": "Готово",
-      "order": 3,
-      "color": "rgb(16 185 129)",
-      "boardId": "d9_T41NEQ2s",
-      "tasks": [],
-      "id": "zTxx1tomqc0"
-    },
-    {
-      "title": "34534534",
-      "color": "rgb(107 114 128)",
-      "boardId": "ufY0hfpV06E",
-      "order": 2,
-      "tasks": [],
-      "id": "NCJ47nEMsFA"
-    },
-    {
-      "title": "345543",
-      "color": "rgb(107 114 128)",
-      "boardId": "ufY0hfpV06E",
-      "order": 3,
-      "tasks": [],
-      "id": "CYvSyXzC_uY"
-    },
-    {
-      "title": "34543",
-      "color": "rgb(107 114 128)",
-      "boardId": "ufY0hfpV06E",
-      "order": 2,
-      "tasks": [],
-      "id": "42qjCDJxlOI"
-    },
-    {
-      "title": "Бэклог",
-      "color": "rgb(107 114 128)",
-      "boardId": "Jcqk2dBgYFE",
-      "order": 0,
-      "tasks": [],
-      "id": "KSZ8iqEut9M"
-    },
-    {
-      "title": "В работе",
-      "color": "rgb(59 130 246)",
-      "boardId": "Jcqk2dBgYFE",
-      "order": 1,
-      "tasks": [],
-      "id": "WaZQPou_U-s"
-    },
-    {
-      "title": "Ревью",
-      "color": "rgb(245 158 11)",
-      "boardId": "Jcqk2dBgYFE",
-      "order": 2,
-      "tasks": [],
-      "id": "c2lNG1-b1KM"
-    },
-    {
-      "title": "Бэклог",
-      "color": "rgb(107 114 128)",
-      "boardId": "mdjTyVd7shg",
-      "order": 0,
-      "tasks": [],
-      "id": "gKuKIQunMqk"
-    },
-    {
-      "title": "Готово",
-      "color": "rgb(16 185 129)",
-      "boardId": "Jcqk2dBgYFE",
-      "order": 1,
-      "tasks": [],
-      "id": "9NQVmUWbmdM"
-    },
-    {
-      "title": "В работе",
-      "color": "rgb(59 130 246)",
-      "boardId": "mdjTyVd7shg",
-      "order": 2,
-      "tasks": [],
-      "id": "ynL0r-p0w70"
-    },
-    {
-      "title": "Ревью",
-      "color": "rgb(245 158 11)",
-      "boardId": "mdjTyVd7shg",
-      "order": 4,
-      "tasks": [],
-      "id": "9s61kaUGEmY"
-    },
-    {
-      "title": "Готово",
-      "color": "rgb(16 185 129)",
-      "boardId": "mdjTyVd7shg",
-      "order": 5,
-      "tasks": [],
-      "id": "aQ4rWhs4IcM"
+      "id": "58GJdpAA2yM"
     }
   ],
   "tasks": [],
@@ -530,6 +123,166 @@
       ],
       "createdAt": "2026-05-12T16:41:41.666Z",
       "id": "2gdiUnkDkPw"
+    }
+  ],
+  "projectMembers": [
+    {
+      "projectId": "JR8iEFtZ8CE",
+      "userId": "FY2NAil-yUY",
+      "role": "owner",
+      "createdAt": "2026-05-12T17:28:53.223Z",
+      "updatedAt": "2026-05-12T17:28:53.223Z",
+      "id": "b5tXtN_7hSQ"
+    },
+    {
+      "projectId": "8x2bS4Gpks0",
+      "userId": "JH7VlipT7Ug",
+      "role": "owner",
+      "createdAt": "2026-05-12T18:29:39.913Z",
+      "updatedAt": "2026-05-12T18:29:39.913Z",
+      "id": "GsBjx3JPZTA"
+    },
+    {
+      "projectId": "viYJfu_0wJQ",
+      "userId": "FY2NAil-yUY",
+      "role": "owner",
+      "createdAt": "2026-05-12T18:31:47.736Z",
+      "updatedAt": "2026-05-12T18:31:47.736Z",
+      "id": "Zq1mPo4DLFs"
+    },
+    {
+      "projectId": "viYJfu_0wJQ",
+      "userId": "JH7VlipT7Ug",
+      "role": "member",
+      "createdAt": "2026-05-12T18:32:26.060Z",
+      "updatedAt": "2026-05-12T18:32:26.060Z",
+      "id": "gddBqnkVp68"
+    },
+    {
+      "projectId": "O_UucvcmD8U",
+      "userId": "FY2NAil-yUY",
+      "role": "owner",
+      "createdAt": "2026-05-12T18:33:43.849Z",
+      "updatedAt": "2026-05-12T18:33:43.849Z",
+      "id": "iMnRjAboZGU"
+    },
+    {
+      "projectId": "rBBGLJWBzNc",
+      "userId": "FY2NAil-yUY",
+      "role": "owner",
+      "createdAt": "2026-05-12T18:36:28.573Z",
+      "updatedAt": "2026-05-12T18:36:28.573Z",
+      "id": "gA1vyFFBhN0"
+    },
+    {
+      "projectId": "rBBGLJWBzNc",
+      "userId": "JH7VlipT7Ug",
+      "role": "member",
+      "createdAt": "2026-05-12T18:43:58.687Z",
+      "updatedAt": "2026-05-12T18:43:58.687Z",
+      "id": "DsigOKrWh5E"
+    }
+  ],
+  "projectInvitations": [
+    {
+      "projectId": "JR8iEFtZ8CE",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "rejected",
+      "createdAt": "2026-05-12T17:36:56.177Z",
+      "updatedAt": "2026-05-12T18:02:25.743Z",
+      "id": "ol_Zu1_Drrc"
+    },
+    {
+      "projectId": "JR8iEFtZ8CE",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "1",
+      "role": "member",
+      "status": "pending",
+      "createdAt": "2026-05-12T17:52:26.393Z",
+      "updatedAt": "2026-05-12T17:52:26.393Z",
+      "id": "zXts1RgG-cQ"
+    },
+    {
+      "projectId": "JR8iEFtZ8CE",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "rejected",
+      "createdAt": "2026-05-12T18:05:15.009Z",
+      "updatedAt": "2026-05-12T18:08:08.875Z",
+      "id": "dxJKJbArjtI"
+    },
+    {
+      "projectId": "JR8iEFtZ8CE",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "rejected",
+      "createdAt": "2026-05-12T18:12:02.883Z",
+      "updatedAt": "2026-05-12T18:12:19.352Z",
+      "id": "WG-4nHIaDHg"
+    },
+    {
+      "projectId": "JR8iEFtZ8CE",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "accepted",
+      "createdAt": "2026-05-12T18:25:48.701Z",
+      "updatedAt": "2026-05-12T18:25:58.141Z",
+      "id": "LFhAQWN79CY"
+    },
+    {
+      "projectId": "viYJfu_0wJQ",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "accepted",
+      "createdAt": "2026-05-12T18:31:51.666Z",
+      "updatedAt": "2026-05-12T18:32:26.060Z",
+      "id": "zQAAs-zJ36Y"
+    },
+    {
+      "projectId": "O_UucvcmD8U",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "rejected",
+      "createdAt": "2026-05-12T18:34:01.112Z",
+      "updatedAt": "2026-05-12T18:37:05.909Z",
+      "id": "gm2rxrCLV9Y"
+    },
+    {
+      "projectId": "rBBGLJWBzNc",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "rejected",
+      "createdAt": "2026-05-12T18:36:46.267Z",
+      "updatedAt": "2026-05-12T18:37:06.753Z",
+      "id": "Bihtnoqc4tY"
+    },
+    {
+      "projectId": "rBBGLJWBzNc",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "rejected",
+      "createdAt": "2026-05-12T18:40:37.480Z",
+      "updatedAt": "2026-05-12T18:40:59.634Z",
+      "id": "hSH7oruCGXY"
+    },
+    {
+      "projectId": "rBBGLJWBzNc",
+      "fromUserId": "FY2NAil-yUY",
+      "toUserId": "JH7VlipT7Ug",
+      "role": "member",
+      "status": "accepted",
+      "createdAt": "2026-05-12T18:43:43.277Z",
+      "updatedAt": "2026-05-12T18:43:58.687Z",
+      "id": "jqn2AuU1llQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

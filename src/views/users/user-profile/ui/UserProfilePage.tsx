@@ -17,23 +17,33 @@ export const UserProfilePage = observer(function UserProfilePage({
     userId,
 }: UserProfilePageProps) {
     const router = useRouter();
-    const { authStore, friendStore, projectStore } = useStore();
+    const { authStore, friendStore, projectStore, projectMemberStore } = useStore();
 
     const currentUser = authStore.user;
 
+
     useEffect(() => {
         friendStore.fetchAll();
-
-        if (currentUser?.id) {
-            projectStore.fetchProjects(currentUser.id);
-        }
-    }, [currentUser?.id, friendStore, projectStore]);
+        projectMemberStore.fetchAll();
+        projectStore.fetchAllProjects();
+    }, [friendStore, projectMemberStore, projectStore]);
 
     if (!currentUser) {
         return null;
     }
 
     const targetUser = friendStore.getUserById(userId);
+
+    const userProjects = projectStore.projects.filter((project) => {
+        const isOwner = project.owner === targetUser?.id;
+
+        const isAcceptedMember = projectMemberStore.isProjectMember(
+            project.id,
+            targetUser!.id,
+        );
+
+        return isOwner || isAcceptedMember;
+    });
 
     if (!targetUser) {
         return (
@@ -56,11 +66,6 @@ export const UserProfilePage = observer(function UserProfilePage({
     );
 
     const friends = friendStore.getFriends(targetUser.id);
-    const userProjects = projectStore.projects.filter(
-        (project) =>
-            project.owner === targetUser.id ||
-            project.members.some((member) => member.id === targetUser.id)
-    );
 
     const avatarLetter = targetUser.fullName.slice(0, 1).toUpperCase();
 

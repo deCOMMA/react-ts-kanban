@@ -56,6 +56,12 @@ export const ProjectLayout = observer(function ProjectLayout({
                     >
                         Информация
                     </Styles.TabLink>
+                    <Styles.TabLink
+                        href={`/project/${projectId}/users`}
+                        $active={pathname === `/project/${projectId}/users`}
+                    >
+                        Участники
+                    </Styles.TabLink>
                 </Styles.Tabs>
 
                 <Styles.Content>{children}</Styles.Content>

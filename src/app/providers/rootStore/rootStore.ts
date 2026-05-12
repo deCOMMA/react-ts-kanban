@@ -4,6 +4,7 @@ import { ColumnStore } from "@/src/entities/column";
 import { CommentStore } from "@/src/entities/comment";
 import { FriendStore } from "@/src/entities/friend/inedx";
 import { ProjectStore } from "@/src/entities/project";
+import { ProjectMemberStore } from "@/src/entities/project-member";
 import { TaskStore } from "@/src/entities/task";
 import { UserStore } from "@/src/entities/user";
 
@@ -16,6 +17,7 @@ export class RootStore {
     taskStore = new TaskStore();
     commentStore = new CommentStore();
     friendStore = new FriendStore();
+    projectMemberStore = new ProjectMemberStore();
 }
 
 export const rootStore = new RootStore();

@@ -20,7 +20,7 @@ export const ProfileLayout = observer(function ProfileLayout({
     children,
 }: ProfileLayoutProps) {
     const pathname = usePathname();
-    const { authStore, projectStore, friendStore } = useStore();
+    const { authStore, projectStore, friendStore, projectMemberStore } = useStore();
 
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [fullName, setFullName] = useState("");
@@ -42,6 +42,17 @@ export const ProfileLayout = observer(function ProfileLayout({
             friendStore.fetchAll();
         }
     }, [user?.id, projectStore, friendStore]);
+
+    const userProjects = projectStore.projects.filter((project) => {
+        const isOwner = project.owner === user?.id;
+
+        const isAcceptedMember = projectMemberStore.isProjectMember(
+            project.id,
+            user!.id,
+        );
+
+        return isOwner || isAcceptedMember;
+    });
 
     const handleOpenEdit = () => {
         if (!user) {
@@ -131,7 +142,7 @@ export const ProfileLayout = observer(function ProfileLayout({
 
                 <Styles.StatsGrid>
                     <Styles.StatCard>
-                        <Styles.StatValue>{projectStore.projects.length}</Styles.StatValue>
+                        <Styles.StatValue>{userProjects.length}</Styles.StatValue>
                         <Styles.StatLabel>Проектов</Styles.StatLabel>
                     </Styles.StatCard>
 

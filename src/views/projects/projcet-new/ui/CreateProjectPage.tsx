@@ -12,7 +12,7 @@ import { useStore } from "@/src/app/providers/rootStore/StoreProviders";
 
 export const CreateProjectPage = observer(function CreateProjectPage() {
     const router = useRouter();
-    const { authStore, projectStore } = useStore();
+    const { authStore, projectStore, projectMemberStore } = useStore();
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -45,6 +45,8 @@ export const CreateProjectPage = observer(function CreateProjectPage() {
         );
 
         if (project) {
+            await projectMemberStore.createOwnerMember(project.id, authStore.user.id);
+
             router.push(`/project/${project.id}/kanban`);
         }
     };
