@@ -3,8 +3,10 @@ import type { CreateDto, Nullable, UpdateDto } from "@/src/shared/types/index";
 export interface User {
     id: string;
     email: string;
+    username: string;
     fullName: string;
     avatarUrl?: Nullable<string>;
+    bio?: Nullable<string>;
     createdAt: string;
     updatedAt: string;
     password: string;

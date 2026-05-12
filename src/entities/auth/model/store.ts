@@ -4,6 +4,7 @@ import {
     loginUser,
     registerUser,
     checkUserByEmail,
+    checkUserByUsername,
 } from "../model/authService";
 
 export class AuthStore {
@@ -35,29 +36,42 @@ export class AuthStore {
         }
     }
 
-    async register(fullName: string, email: string, password: string) {
+    async register(
+        fullName: string,
+        username: string,
+        email: string,
+        password: string
+    ) {
         this.isLoading = true;
         this.error = null;
-
+        console.log(this.isLoading)
         try {
-            const exists = await checkUserByEmail(email);
+            const emailExists = await checkUserByEmail(email);
 
-            if (exists) {
+            if (emailExists) {
                 throw new Error("Пользователь с такой почтой уже существует");
+            }
+
+            const usernameExists = await checkUserByUsername(username);
+
+            if (usernameExists) {
+                throw new Error("Пользователь с таким ником уже существует");
             }
 
             const now = new Date().toISOString();
 
             await registerUser({
                 fullName: fullName.trim(),
+                username: username.trim().toLowerCase(),
                 email: email.trim().toLowerCase(),
                 password,
                 avatarUrl: null,
+                bio: null,
                 createdAt: now,
                 updatedAt: now,
             });
-
             return true;
+
         } catch (e: unknown) {
             runInAction(() => {
                 this.error = e instanceof Error ? e.message : "Ошибка регистрации";
@@ -65,6 +79,7 @@ export class AuthStore {
 
             return false;
         } finally {
+
             runInAction(() => {
                 this.isLoading = false;
             });
@@ -115,5 +130,78 @@ export class AuthStore {
 
     get isAuth() {
         return Boolean(this.user);
+    }
+
+    async updateProfile(data: {
+        fullName: string;
+        username: string;
+        avatarUrl?: string | null;
+        bio?: string | null;
+    }) {
+        if (!this.user) {
+            return false;
+        }
+
+        this.isLoading = true;
+        this.error = null;
+
+        try {
+            const users = await import("../model/authService").then((module) =>
+                module.getUsers()
+            );
+
+            const normalizedUsername = data.username.trim().toLowerCase();
+
+            const usernameExists = users.some(
+                (user) =>
+                    user.id !== this.user?.id &&
+                    user.username?.toLowerCase() === normalizedUsername
+            );
+
+            if (usernameExists) {
+                throw new Error("Пользователь с таким ником уже существует");
+            }
+
+            const updatedUser = await fetch(
+                `http://localhost:4000/users/${this.user.id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        fullName: data.fullName.trim(),
+                        username: normalizedUsername,
+                        avatarUrl: data.avatarUrl || null,
+                        bio: data.bio?.trim() || null,
+                        updatedAt: new Date().toISOString(),
+                    }),
+                }
+            ).then((res) => {
+                if (!res.ok) {
+                    throw new Error("Не удалось обновить профиль");
+                }
+
+                return res.json();
+            });
+
+            runInAction(() => {
+                this.user = updatedUser;
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            });
+
+            return true;
+        } catch (e: unknown) {
+            runInAction(() => {
+                this.error =
+                    e instanceof Error ? e.message : "Ошибка обновления профиля";
+            });
+
+            return false;
+        } finally {
+            runInAction(() => {
+                this.isLoading = false;
+            });
+        }
     }
 }

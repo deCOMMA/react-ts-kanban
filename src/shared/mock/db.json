@@ -3,29 +3,24 @@
     {
       "id": "1",
       "fullName": "Dmitriy",
+      "username": "dmitriy",
       "email": "serbinovskijdima@gmail.com",
       "password": "123456",
       "avatarUrl": null,
+      "bio": null,
       "createdAt": "2026-05-04T00:00:00.000Z",
       "updatedAt": "2026-05-04T00:00:00.000Z"
     },
     {
-      "fullName": "decomma",
-      "email": "123@123.123",
-      "password": "123456",
-      "avatarUrl": null,
-      "createdAt": "2026-05-03T23:24:20.970Z",
-      "updatedAt": "2026-05-03T23:24:20.970Z",
-      "id": "qQT9DRXSJR0"
-    },
-    {
-      "fullName": "decomma",
-      "email": "test@test.ru",
+      "fullName": "Дима",
+      "username": "decomma",
+      "email": "serbinovskijdima@gmail.com1",
       "password": "123123",
       "avatarUrl": null,
-      "createdAt": "2026-05-11T15:46:59.291Z",
-      "updatedAt": "2026-05-11T15:46:59.291Z",
-      "id": "BUA6V1dPjOw"
+      "bio": null,
+      "createdAt": "2026-05-12T14:33:21.805Z",
+      "updatedAt": "2026-05-12T14:33:21.805Z",
+      "id": "FY2NAil-yUY"
     }
   ],
   "projects": [
@@ -103,6 +98,21 @@
       ],
       "boards": [],
       "id": "ULXpvcDbUtc"
+    },
+    {
+      "title": "Диплом",
+      "description": "просто делаю диплом с друзьями",
+      "key": "ДИПЛ",
+      "owner": "FY2NAil-yUY",
+      "members": [
+        {
+          "id": "FY2NAil-yUY",
+          "fullName": "Дима",
+          "avatarUrl": null
+        }
+      ],
+      "boards": [],
+      "id": "TWFbmlSYlpc"
     }
   ],
   "boards": [
@@ -135,6 +145,12 @@
       "projectId": "ULXpvcDbUtc",
       "columns": [],
       "id": "d9_T41NEQ2s"
+    },
+    {
+      "title": "Основная доска",
+      "projectId": "TWFbmlSYlpc",
+      "columns": [],
+      "id": "Jcqk2dBgYFE"
     }
   ],
   "columns": [
@@ -385,6 +401,70 @@
       "order": 2,
       "tasks": [],
       "id": "42qjCDJxlOI"
+    },
+    {
+      "title": "Бэклог",
+      "color": "rgb(107 114 128)",
+      "boardId": "Jcqk2dBgYFE",
+      "order": 0,
+      "tasks": [],
+      "id": "KSZ8iqEut9M"
+    },
+    {
+      "title": "В работе",
+      "color": "rgb(59 130 246)",
+      "boardId": "Jcqk2dBgYFE",
+      "order": 1,
+      "tasks": [],
+      "id": "WaZQPou_U-s"
+    },
+    {
+      "title": "Ревью",
+      "color": "rgb(245 158 11)",
+      "boardId": "Jcqk2dBgYFE",
+      "order": 2,
+      "tasks": [],
+      "id": "c2lNG1-b1KM"
+    },
+    {
+      "title": "Бэклог",
+      "color": "rgb(107 114 128)",
+      "boardId": "mdjTyVd7shg",
+      "order": 0,
+      "tasks": [],
+      "id": "gKuKIQunMqk"
+    },
+    {
+      "title": "Готово",
+      "color": "rgb(16 185 129)",
+      "boardId": "Jcqk2dBgYFE",
+      "order": 1,
+      "tasks": [],
+      "id": "9NQVmUWbmdM"
+    },
+    {
+      "title": "В работе",
+      "color": "rgb(59 130 246)",
+      "boardId": "mdjTyVd7shg",
+      "order": 2,
+      "tasks": [],
+      "id": "ynL0r-p0w70"
+    },
+    {
+      "title": "Ревью",
+      "color": "rgb(245 158 11)",
+      "boardId": "mdjTyVd7shg",
+      "order": 4,
+      "tasks": [],
+      "id": "9s61kaUGEmY"
+    },
+    {
+      "title": "Готово",
+      "color": "rgb(16 185 129)",
+      "boardId": "mdjTyVd7shg",
+      "order": 5,
+      "tasks": [],
+      "id": "aQ4rWhs4IcM"
     }
   ],
   "tasks": [],

@@ -55,13 +55,26 @@ export const AuthLink = styled(Link)`
   text-decoration: none;
 `;
 
-export const UserInfo = styled.div`
+export const UserInfoLink = styled(Link)`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
 
-  padding: 0 ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+
+  border-radius: ${({ theme }) => theme.radius.md};
+
   color: ${({ theme }) => theme.colors.textPrimary};
+  text-decoration: none;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.secondary};
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export const UserName = styled.span`

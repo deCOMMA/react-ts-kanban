@@ -17,8 +17,17 @@ export async function getUsers() {
 export async function checkUserByEmail(email: string) {
     const users = await getUsers();
     const normalizedEmail = email.trim().toLowerCase();
-
+    console.log(users);
     return users.some((user) => user.email.toLowerCase() === normalizedEmail);
+}
+
+export async function checkUserByUsername(username: string) {
+    const users = await getUsers();
+    const normalizedUsername = username.trim().toLowerCase();
+    console.log(users);
+    return users.some(
+        (user) => user.username?.toLowerCase() === normalizedUsername
+    );
 }
 
 export async function loginUser(email: string, password: string) {

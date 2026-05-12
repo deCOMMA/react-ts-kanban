@@ -17,6 +17,7 @@ export function RegisterPage() {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const [formError, setFormError] = useState("");
+    const [username, setUsername] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,7 +43,24 @@ export function RegisterPage() {
             return;
         }
 
-        const success = await authStore.register(fullName, email, password);
+        if (!username.trim()) {
+            setFormError("Введите ник");
+            return;
+        }
+
+        if (!/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())) {
+            setFormError(
+                "Ник должен быть от 3 до 20 символов и содержать только латиницу, цифры или _"
+            );
+            return;
+        }
+
+        const success = await authStore.register(
+            fullName,
+            username,
+            email,
+            password
+        );
 
         if (success) {
             router.push("/login");
@@ -66,7 +84,12 @@ export function RegisterPage() {
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Введите имя"
                     />
-
+                    <Input
+                        label="Ник"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Например: decomma9"
+                    />
                     <Input
                         label="Email"
                         type="email"
@@ -74,7 +97,6 @@ export function RegisterPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="example@mail.com"
                     />
-
                     <Input
                         label="Пароль"
                         type="password"
@@ -82,7 +104,6 @@ export function RegisterPage() {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Минимум 6 символов"
                     />
-
                     <Input
                         label="Повторите пароль"
                         type="password"

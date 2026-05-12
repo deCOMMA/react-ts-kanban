@@ -33,10 +33,10 @@ export const Header = observer(function Header() {
                         <>
                             <Styles.NavLink href="/project">Проекты</Styles.NavLink>
 
-                            <Styles.UserInfo>
+                            <Styles.UserInfoLink href="/profile">
                                 <UserIcon size={18} />
                                 <Styles.UserName>{authStore.user?.fullName}</Styles.UserName>
-                            </Styles.UserInfo>
+                            </Styles.UserInfoLink>
 
                             <Button
                                 variant="outlined"
