@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { MoreVerticalIcon, PencilIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { PencilIcon, PlusIcon, Trash2Icon } from "lucide-react";
 
 import type { Column } from "@/src/entities/column";
 import type { Task } from "@/src/entities/task";
 import { TASK_PRIORITY_LABEL } from "@/src/entities/task";
 import { Button } from "@/src/shared/ui/Button";
+import { ConfirmModal } from "@/src/shared/ui/ConfirmModal";
 
 import { ColumnModal } from "./ColumnModal/ColumnModal";
 import * as Styles from "./KanbanBoard.styles";
@@ -36,6 +37,9 @@ export function KanbanBoard({
     const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
     const [editableColumn, setEditableColumn] = useState<Column | null>(null);
 
+    const [deletableColumn, setDeletableColumn] = useState<Column | null>(null);
+    const [deleteError, setDeleteError] = useState("");
+
     const handleOpenCreateColumn = () => {
         setEditableColumn(null);
         setIsColumnModalOpen(true);
@@ -61,23 +65,39 @@ export function KanbanBoard({
         handleCloseColumnModal();
     };
 
-    const handleDeleteColumn = async (column: Column) => {
+    const handleOpenDeleteColumn = (column: Column) => {
+        setDeleteError("");
+
         const tasks = getTasksByColumn(column.id);
 
         if (tasks.length > 0) {
-            alert("Нельзя удалить колонку, в которой есть задачи");
+            setDeleteError("Нельзя удалить колонку, в которой есть задачи");
+            setDeletableColumn(column);
             return;
         }
 
-        const confirmed = window.confirm(
-            `Удалить колонку "${column.title}"? Это действие нельзя отменить.`
-        );
+        setDeletableColumn(column);
+    };
 
-        if (!confirmed) {
+    const handleCloseDeleteColumn = () => {
+        setDeleteError("");
+        setDeletableColumn(null);
+    };
+
+    const handleConfirmDeleteColumn = async () => {
+        if (!deletableColumn) {
             return;
         }
 
-        await onDeleteColumn(column.id);
+        const tasks = getTasksByColumn(deletableColumn.id);
+
+        if (tasks.length > 0) {
+            setDeleteError("Нельзя удалить колонку, в которой есть задачи");
+            return;
+        }
+
+        await onDeleteColumn(deletableColumn.id);
+        handleCloseDeleteColumn();
     };
 
     return (
@@ -107,7 +127,7 @@ export function KanbanBoard({
 
                                     <Styles.ColumnActionButton
                                         type="button"
-                                        onClick={() => handleDeleteColumn(column)}
+                                        onClick={() => handleOpenDeleteColumn(column)}
                                         title="Удалить колонку"
                                     >
                                         <Trash2Icon size={16} />
@@ -163,6 +183,20 @@ export function KanbanBoard({
                 isLoading={isColumnLoading}
                 onClose={handleCloseColumnModal}
                 onSubmit={handleSubmitColumn}
+            />
+
+            <ConfirmModal
+                isOpen={Boolean(deletableColumn)}
+                title="Удаление колонки"
+                description={
+                    deleteError ||
+                    `Вы действительно хотите удалить колонку "${deletableColumn?.title}"? Это действие нельзя отменить.`
+                }
+                confirmText="Удалить"
+                isLoading={isColumnLoading}
+                confirmDisabled={Boolean(deleteError)}
+                onClose={handleCloseDeleteColumn}
+                onConfirm={handleConfirmDeleteColumn}
             />
         </>
     );
